@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koperasi Mandiri - Dashboard & Kasir</title>
+  <title>Koperasi Mandiri - Dashboard dan Kasir</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts - Inter -->
@@ -50,7 +50,7 @@
         <div class="inline-flex p-3 bg-indigo-600/30 rounded-xl text-indigo-400 mb-3 border border-indigo-500/30">
           <i data-lucide="store" class="w-10 h-10"></i>
         </div>
-        <h1 class="text-2xl font-bold text-white tracking-tight">E-KOPERASI MANDIRI</h1>
+        <h1 class="text-2xl font-bold text-white tracking-tight">Koperasi Mandiri</h1>
         <p class="text-slate-300 text-sm mt-1">Sistem Penjualan dan Stok Barang</p>
       </div>
       
@@ -84,7 +84,7 @@
       </form>
       
       <div class="mt-8 pt-6 border-t border-white/10 text-center">
-        <p class="text-xs text-slate-400">Hubungi Admin jika Anda lupa kredensial login</p>
+        <p class="text-xs text-slate-400">Hubungi Admin jika Anda lupa username/password</p>
       </div>
     </div>
   </div>
@@ -218,7 +218,7 @@
                 <i data-lucide="layers" class="w-6 h-6"></i>
               </div>
               <div>
-                <p class="text-xs text-slate-500 font-semibold tracking-wide uppercase">Total Stok Fisik</p>
+                <p class="text-xs text-slate-500 font-semibold tracking-wide uppercase">Total Stok</p>
                 <h3 class="text-lg font-bold text-slate-900 mt-0.5" id="dashStok">0 Pcs</h3>
               </div>
             </div>
@@ -249,7 +249,7 @@
             <!-- Left: Chart -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="font-bold text-slate-900 text-lg">Statistik Koperasi Sekolah</h3>
+                <h3 class="font-bold text-slate-900 text-lg">Statistik Koperasi Mandiri</h3>
                 <span class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full font-medium">Bulan Ini</span>
               </div>
               <div class="h-64">
@@ -264,15 +264,15 @@
                 <div class="space-y-2">
                   <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">1</span>
-                    <p class="text-xs font-semibold text-slate-700">Scan / Cari NIS Siswa Aktif</p>
+                    <p class="text-xs font-semibold text-slate-700">Scan / Cari NIS Murid Aktif</p>
                   </div>
                   <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">2</span>
-                    <p class="text-xs font-semibold text-slate-700">Pilih Barang & Masukkan Qty</p>
+                    <p class="text-xs font-semibold text-slate-700">Pilih Barang dan Masukkan Qty</p>
                   </div>
                   <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm">3</span>
-                    <p class="text-xs font-semibold text-slate-700">Selesaikan Pembayaran & Cetak Nota</p>
+                    <p class="text-xs font-semibold text-slate-700">Selesaikan Pembayaran dan Cetak Nota</p>
                   </div>
                 </div>
               </div>
@@ -291,7 +291,7 @@
               <!-- Student Finder -->
               <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                 <h3 class="font-bold text-slate-900 text-base mb-4 flex items-center gap-2">
-                  <i data-lucide="user-check" class="text-indigo-600 w-5 h-5"></i> Identitas Pembeli (Siswa)
+                  <i data-lucide="user-check" class="text-indigo-600 w-5 h-5"></i> Identitas Pembeli
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div class="md:col-span-1">
@@ -335,7 +335,7 @@
                     <input type="text" id="posStokTersedia" readonly placeholder="0" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-700 text-center focus:outline-none">
                   </div>
                   <div class="md:col-span-2">
-                    <label class="block text-slate-500 text-xs font-semibold mb-1">Kuantitas (Qty)</label>
+                    <label class="block text-slate-500 text-xs font-semibold mb-1">Jumlah</label>
                     <input type="number" id="posQty" min="1" value="1" class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm text-center">
                   </div>
                   <div class="md:col-span-2">
@@ -358,7 +358,7 @@
                       <tr>
                         <th class="px-6 py-3">Barang</th>
                         <th class="px-6 py-3 text-right">Harga Satuan</th>
-                        <th class="px-6 py-3 text-center">Qty</th>
+                        <th class="px-6 py-3 text-center">Jumlah</th>
                         <th class="px-6 py-3 text-right">Subtotal</th>
                         <th class="px-6 py-3 text-center">Aksi</th>
                       </tr>
@@ -423,7 +423,7 @@
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-slate-700 text-sm font-semibold mb-1">Jumlah (Qty)</label>
+                  <label class="block text-slate-700 text-sm font-semibold mb-1">Jumlah</label>
                   <input type="number" id="smQty" required min="1" placeholder="Masukan qty..." class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
                 </div>
                 <div>
@@ -646,7 +646,7 @@
                   <tr>
                     <th class="px-6 py-3">Username</th>
                     <th class="px-6 py-3">Nama Lengkap</th>
-                    <th class="px-6 py-3">Tingkatan (Level)</th>
+                    <th class="px-6 py-3">Level</th>
                     <th class="px-6 py-3 text-center">Status</th>
                     <th class="px-6 py-3 text-center">Aksi</th>
                   </tr>
@@ -697,7 +697,7 @@
             </select>
           </div>
         </div>
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Harga Beli Last</label>
             <input type="number" id="formBarangHargaBeli" required min="0" placeholder="Rp" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
@@ -705,6 +705,12 @@
           <div>
             <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Harga Jual</label>
             <input type="number" id="formBarangHargaJual" required min="0" placeholder="Rp" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Stok Barang</label>
+            <input type="number" id="formBarangStok" required min="0" placeholder="0" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
           </div>
           <div>
             <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Satuan</label>
@@ -903,7 +909,7 @@
   <div id="modalReceipt" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-[99] flex items-center justify-center hidden p-4">
     <div class="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-6 border border-slate-200">
       <div class="text-center pb-4 border-b border-dashed border-slate-200">
-        <h4 class="font-extrabold text-slate-900 text-lg uppercase tracking-wider">KOPERASI SEKOLAH</h4>
+        <h4 class="font-extrabold text-slate-900 text-lg uppercase tracking-wider">KOPERASI MANDIRI</h4>
         <p class="text-xs text-slate-500">Maju Bersama Sejahtera Sejalan</p>
         <p class="text-[10px] text-slate-400 mt-1">Sistem Digital Kasir v1.0</p>
       </div>
@@ -947,7 +953,7 @@
 
       <div class="text-center pt-4 border-t border-dashed border-slate-200 text-[10px] text-slate-400">
         <p class="font-semibold">Terima Kasih Atas Partisipasi Anda!</p>
-        <p class="mt-1">Struk ini sah dikeluarkan secara digital oleh koperasi sekolah.</p>
+        <p class="mt-1">Struk ini sah dikeluarkan secara digital oleh koperasi Mandiri</p>
       </div>
 
       <div class="mt-6 flex gap-2">
@@ -1022,6 +1028,7 @@
       document.getElementById('loadingScreen').classList.remove('hidden');
     }
 
+    // --- STOP LOADING ---
     function hideLoading() {
       document.getElementById('loadingScreen').classList.add('hidden');
     }
@@ -1032,6 +1039,7 @@
       document.getElementById('mainLayout').classList.add('hidden');
     }
 
+    // --- RENDER DASHBOARD ---
     function initDashboardView() {
       document.getElementById('loginPage').classList.add('hidden');
       document.getElementById('mainLayout').classList.remove('hidden');
@@ -1272,7 +1280,7 @@
 
     function renderPosSelectBarang() {
       const select = document.getElementById('posSelectBarang');
-      select.innerHTML = '<option value="">-- Pilih Barang Dagangan --</option>';
+      select.innerHTML = '<option value="">-- Pilih Barang --</option>';
       
       // Hanya barang berstatus aktif yang ditampilkan
       state.barang.filter(b => b.status === 'Aktif').forEach(b => {
@@ -1663,6 +1671,8 @@
       document.getElementById('formBarang').reset();
       document.getElementById('formBarangKode').readOnly = false;
       document.getElementById('formBarangKode').classList.remove('bg-slate-50');
+      document.getElementById('formBarangStok').readOnly = false;
+      document.getElementById('formBarangStok').classList.remove('bg-slate-50');
       
       // Populate dropdowns
       populateBarangFormDropdowns();
@@ -1685,20 +1695,35 @@
       });
     }
 
-    function editBarang(code) {
+    async function editBarang(code) {
+      showLoading("Memuat data terbaru barang...");
+      const resBarang = await apiRequest('getBarang');
+      hideLoading();
+
+      if (resBarang.success && resBarang.data) {
+        state.barang = resBarang.data;
+      }
+
       const b = state.barang.find(item => item.kodeBarang === code);
       if (!b) return;
 
       document.getElementById('modalBarangTitle').innerText = 'Edit Barang';
       document.getElementById('formBarangKode').value = b.kodeBarang;
-      document.getElementById('formBarangKode').readonly = true;
+      document.getElementById('formBarangKode').readOnly = true; 
       document.getElementById('formBarangKode').classList.add('bg-slate-50');
       
       document.getElementById('formBarangNama').value = b.namaBarang;
       document.getElementById('formBarangHargaBeli').value = b.hargaBeliTerakhir;
       document.getElementById('formBarangHargaJual').value = b.hargaJual;
-      document.getElementById('formBarangSatuan').value = b.satuan;
-      document.getElementById('formBarangStatus').value = b.status;
+      
+      // Mengaktifkan agar stok barang bisa diedit secara manual
+      const stokField = document.getElementById('formBarangStok');
+      stokField.value = b.stok || 0;
+      stokField.readOnly = false; 
+      stokField.classList.remove('bg-slate-50');
+
+      document.getElementById('formBarangSatuan').value = b.satuan || '';
+      document.getElementById('formBarangStatus').value = b.status || 'Aktif';
 
       populateBarangFormDropdowns();
       document.getElementById('formBarangKategori').value = b.kodeKategori;
@@ -1707,22 +1732,27 @@
       document.getElementById('modalBarang').classList.remove('hidden');
     }
 
-    // Submit Barang
     document.getElementById('formBarang').addEventListener('submit', async (e) => {
       e.preventDefault();
+      
+      const kodeBarang = document.getElementById('formBarangKode').value.trim();
+      const inputStok = parseInt(document.getElementById('formBarangStok').value) || 0;
+      
+      showLoading("Menyimpan data master barang...");
+      
       const payload = {
-        kodeBarang: document.getElementById('formBarangKode').value.trim(),
+        kodeBarang: kodeBarang,
         namaBarang: document.getElementById('formBarangNama').value.trim(),
         kodeKategori: document.getElementById('formBarangKategori').value,
         kodeSupplier: document.getElementById('formBarangSupplier').value,
         hargaBeliTerakhir: parseFloat(document.getElementById('formBarangHargaBeli').value) || 0,
         hargaJual: parseFloat(document.getElementById('formBarangHargaJual').value) || 0,
+        stok: inputStok, // Diambil langsung dari form input agar bisa di-edit secara manual!
         satuan: document.getElementById('formBarangSatuan').value.trim(),
         status: document.getElementById('formBarangStatus').value,
         username: state.currentUser.username
       };
 
-      showLoading("Menyimpan data master barang...");
       const res = await apiRequest('saveBarang', { data: payload });
       hideLoading();
 
@@ -1833,7 +1863,7 @@
 
       document.getElementById('modalSiswaTitle').innerText = 'Edit Siswa';
       document.getElementById('formSiswaNis').value = s.nis;
-      document.getElementById('formSiswaNis').readonly = true;
+      document.getElementById('formSiswaNis').readOnly = true;
       document.getElementById('formSiswaNis').classList.add('bg-slate-50');
       
       document.getElementById('formSiswaNama').value = s.namaSiswa;
@@ -1960,7 +1990,7 @@
 
       document.getElementById('modalSupplierTitle').innerText = 'Edit Supplier';
       document.getElementById('formSupplierKode').value = s.kodeSupplier;
-      document.getElementById('formSupplierKode').readonly = true;
+      document.getElementById('formSupplierKode').readOnly = true;
       document.getElementById('formSupplierKode').classList.add('bg-slate-50');
       
       document.getElementById('formSupplierNama').value = s.namaSupplier;
@@ -2057,7 +2087,7 @@
 
       document.getElementById('modalKategoriTitle').innerText = 'Edit Kategori';
       document.getElementById('formKategoriKode').value = k.kodeKategori;
-      document.getElementById('formKategoriKode').readonly = true;
+      document.getElementById('formKategoriKode').readOnly = true;
       document.getElementById('formKategoriKode').classList.add('bg-slate-50');
       
       document.getElementById('formKategoriNama').value = k.namaKategori;
@@ -2186,7 +2216,7 @@
 
       document.getElementById('modalUserTitle').innerText = 'Edit Pengguna';
       document.getElementById('formUserUsername').value = u.username;
-      document.getElementById('formUserUsername').readonly = true;
+      document.getElementById('formUserUsername').readOnly = true;
       document.getElementById('formUserUsername').classList.add('bg-slate-50');
       
       document.getElementById('formUserNama').value = u.namaLengkap;
