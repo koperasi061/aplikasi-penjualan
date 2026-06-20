@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koperasi Mandiri - Dashboard dan Kasir</title>
+  <title>Koperasi Mandiri - Dashboard & Kasir</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts - Inter -->
@@ -92,7 +92,7 @@
   <!-- ================= MAIN LAYOUT ================= -->
   <div id="mainLayout" class="hidden min-h-screen flex flex-col md:flex-row">
     
-    <!-- SIDEBAR (Desktop) / TOPBAR (Mobile) -->
+    <!-- SIDEBAR -->
     <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col flex-shrink-0 z-30 shadow-xl">
       <!-- Brand Header -->
       <div class="p-5 flex items-center justify-between border-b border-slate-800">
@@ -190,7 +190,6 @@
         
         <!-- PAGE 1: DASHBOARD -->
         <section id="page-dashboard" class="page-section space-y-6">
-          <!-- Widget Info Cards -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <!-- Widget 1: Omzet -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
@@ -286,7 +285,7 @@
         <!-- PAGE 2: KASIR PENJUALAN (POS) -->
         <section id="page-penjualan" class="page-section space-y-6 hidden">
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Side: POS Cart / Items Selection -->
+            <!-- Left Side: POS Cart -->
             <div class="lg:col-span-2 space-y-6">
               <!-- Student Finder -->
               <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -373,7 +372,7 @@
               </div>
             </div>
 
-            <!-- Right Side: Checkout Summary & Action -->
+            <!-- Right Side: Checkout Summary -->
             <div class="space-y-6">
               <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                 <div>
@@ -707,15 +706,9 @@
             <input type="number" id="formBarangHargaJual" required min="0" placeholder="Rp" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Stok Barang</label>
-            <input type="number" id="formBarangStok" required min="0" placeholder="0" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-          </div>
-          <div>
-            <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Satuan</label>
-            <input type="text" id="formBarangSatuan" required placeholder="Pcs/Buku/dll" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-          </div>
+        <div>
+          <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Satuan</label>
+          <input type="text" id="formBarangSatuan" required placeholder="Pcs/Buku/dll" class="w-full px-4 py-2 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
         </div>
         <div>
           <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1">Status</label>
@@ -980,8 +973,8 @@
       supplier: [],
       kategori: [],
       users: [],
-      cart: [], // Multi-item belanja kasir
-      tempPosSiswa: null // Siswa terverifikasi saat checkout
+      cart: [], 
+      tempPosSiswa: null 
     };
 
     // --- CHART INSTANCE ---
@@ -995,7 +988,6 @@
       setInterval(updateClock, 1000);
       setupEventListeners();
       
-      // Auto Login Simulation/Check local storage
       const savedUser = localStorage.getItem('koperasi_user');
       if (savedUser) {
         state.currentUser = JSON.parse(savedUser);
@@ -1044,12 +1036,10 @@
       document.getElementById('loginPage').classList.add('hidden');
       document.getElementById('mainLayout').classList.remove('hidden');
       
-      // Profile render
       document.getElementById('profileName').innerText = state.currentUser.namaLengkap;
       document.getElementById('profileRole').innerText = state.currentUser.level;
       document.getElementById('userInitial').innerText = state.currentUser.namaLengkap.charAt(0).toUpperCase();
 
-      // Show/Hide user management based on level
       const navUsers = document.getElementById('navUsers');
       if (state.currentUser.level === 'Admin') {
         navUsers.classList.remove('hidden');
@@ -1057,17 +1047,13 @@
         navUsers.classList.add('hidden');
       }
 
-      // Default navigate to dashboard
       navigateToPage('dashboard');
     }
 
     function navigateToPage(pageId) {
-      // Hide all pages
       document.querySelectorAll('.page-section').forEach(p => p.classList.add('hidden'));
-      // Show targeted page
       document.getElementById('page-' + pageId).classList.remove('hidden');
 
-      // Update Active Navigation Sidebar
       document.querySelectorAll('#sidebarNav .nav-item').forEach(item => {
         if (item.getAttribute('data-page') === pageId) {
           item.classList.add('active', 'bg-indigo-600', 'text-white');
@@ -1078,7 +1064,6 @@
         }
       });
 
-      // Update Header Title
       const titles = {
         dashboard: "Dashboard Ringkasan",
         penjualan: "Kasir Penjualan (POS)",
@@ -1092,7 +1077,6 @@
       };
       document.getElementById('currentPageTitle').innerText = titles[pageId] || "Aplikasi Koperasi";
 
-      // Fetch fresh data if needed
       fetchFreshDataForPage(pageId);
     }
 
@@ -1231,10 +1215,10 @@
             label: 'Inventaris & Transaksi',
             data: [dash.jumlahBarang, dash.jumlahSiswa, dash.totalStok, dash.penjualanHariIni],
             backgroundColor: [
-              'rgba(99, 102, 241, 0.2)', // Indigo
-              'rgba(14, 165, 233, 0.2)', // Sky
-              'rgba(245, 158, 11, 0.2)', // Amber
-              'rgba(16, 185, 129, 0.2)'  // Emerald
+              'rgba(99, 102, 241, 0.2)', 
+              'rgba(14, 165, 233, 0.2)', 
+              'rgba(245, 158, 11, 0.2)', 
+              'rgba(16, 185, 129, 0.2)'  
             ],
             borderColor: [
               'rgb(99, 102, 241)',
@@ -1266,13 +1250,10 @@
     // --- POS (PENJUALAN) MODULE ---
     async function fetchPOSData() {
       showLoading("Sinkronisasi data barang & siswa...");
-      
-      // Ambil Barang
       const resBarang = await apiRequest('getBarang');
       if (resBarang.success) {
         state.barang = resBarang.data || [];
       }
-
       hideLoading();
       renderPosSelectBarang();
       updatePosSummary();
@@ -1282,7 +1263,6 @@
       const select = document.getElementById('posSelectBarang');
       select.innerHTML = '<option value="">-- Pilih Barang --</option>';
       
-      // Hanya barang berstatus aktif yang ditampilkan
       state.barang.filter(b => b.status === 'Aktif').forEach(b => {
         const option = document.createElement('option');
         option.value = b.kodeBarang;
@@ -1290,13 +1270,11 @@
         select.appendChild(option);
       });
 
-      // Reset info barang
       document.getElementById('posHargaJual').value = '';
       document.getElementById('posStokTersedia').value = '';
       document.getElementById('posQty').value = 1;
     }
 
-    // Triggered when POS product selected
     document.getElementById('posSelectBarang').addEventListener('change', (e) => {
       const code = e.target.value;
       if (!code) {
@@ -1312,7 +1290,6 @@
       }
     });
 
-    // Verify Student NIS
     document.getElementById('btnSearchSiswa').addEventListener('click', async () => {
       const MathCheck = document.getElementById('posNis');
       const nis = MathCheck.value.trim();
@@ -1331,7 +1308,6 @@
           Swal.fire('Tidak Aktif', 'Status keanggotaan siswa tersebut dinonaktifkan', 'error');
           resetPosSiswa();
         } else {
-          // Normalisasi perbedaan properti namaSiswa (getSiswa) dan nama (getSiswaByNis) dari backend
           const namaSiswaTerpilih = s.namaSiswa || s.nama || "Tanpa Nama";
           s.namaSiswa = namaSiswaTerpilih;
           s.nama = namaSiswaTerpilih;
@@ -1353,7 +1329,6 @@
       document.getElementById('posKelasSiswa').value = '';
     }
 
-    // Add item to Cart Table
     document.getElementById('btnPosAddItem').addEventListener('click', () => {
       const select = document.getElementById('posSelectBarang');
       const code = select.value;
@@ -1371,13 +1346,11 @@
       const barang = state.barang.find(b => b.kodeBarang === code);
       if (!barang) return;
 
-      // Cek stok fisik
       if (qty > barang.stok) {
         Swal.fire('Stok Kurang', `Stok tersedia hanya ${barang.stok} ${barang.satuan}`, 'error');
         return;
       }
 
-      // Cek apakah item sudah ada di keranjang
       const existing = state.cart.find(item => item.kodeBarang === code);
       if (existing) {
         const totalQty = existing.qty + qty;
@@ -1397,7 +1370,6 @@
         });
       }
 
-      // Reset adder
       select.value = '';
       document.getElementById('posHargaJual').value = '';
       document.getElementById('posStokTersedia').value = '';
@@ -1457,7 +1429,6 @@
       document.getElementById('posSummaryGrandTotal').innerText = formatRupiah(grandTotal);
     }
 
-    // Clear POS Transaksi
     document.getElementById('btnPosClear').addEventListener('click', () => {
       Swal.fire({
         title: 'Kosongkan Keranjang?',
@@ -1478,7 +1449,6 @@
       });
     });
 
-    // Checkout Submit POS
     document.getElementById('btnPosSubmit').addEventListener('click', async () => {
       if (!state.tempPosSiswa) {
         Swal.fire('Siswa Kosong', 'Harap cari dan verifikasi NIS Siswa terlebih dahulu.', 'warning');
@@ -1511,10 +1481,8 @@
 
           if (res.success && res.data) {
             Swal.fire('Sukses!', 'Transaksi Berhasil Disimpan', 'success');
-            // Menampilkan Struk / Receipt
             showReceipt(res.data, state.tempPosSiswa, state.cart);
             
-            // Clear checkout form
             state.cart = [];
             resetPosSiswa();
             document.getElementById('posNis').value = '';
@@ -1527,7 +1495,6 @@
       });
     });
 
-    // RECEIPT MODAL CONTROL
     function showReceipt(resData, siswa, items) {
       document.getElementById('recInvoice').innerText = resData.invoice;
       document.getElementById('recSiswa').innerText = `${siswa.namaSiswa} (${siswa.nis})`;
@@ -1579,7 +1546,6 @@
       }
     }
 
-    // Submit Stok Masuk Form
     document.getElementById('formStokMasuk').addEventListener('submit', async (e) => {
       e.preventDefault();
       const code = document.getElementById('smSelectBarang').value;
@@ -1602,17 +1568,15 @@
       if (res.success) {
         Swal.fire('Berhasil', 'Stok masuk berhasil didokumentasikan.', 'success');
         document.getElementById('formStokMasuk').reset();
-        fetchStokMasukData(); // Refresh list barang
+        fetchStokMasukData(); 
       } else {
         Swal.fire('Gagal', res.message || 'Gagal menyimpan stok masuk', 'error');
       }
     });
 
-
     // --- DATA MASTER: BARANG MODULE ---
     async function fetchBarangData() {
       showLoading("Sinkronisasi data master barang...");
-      // Fetch fresh categories & suppliers for forms
       const resKategori = await apiRequest('getKategori');
       const resSupplier = await apiRequest('getSupplier');
       const resBarang = await apiRequest('getBarang');
@@ -1645,7 +1609,7 @@
 
         tr.innerHTML = `
           <td class="px-6 py-4 font-bold text-slate-700">${b.kodeBarang}</td>
-          <td class="px-6 py-4 font-semibold text-slate-900">${b.namaBarang} <br><span class="text-xs text-slate-400">${b.satuan}</span></td>
+          <td class="px-6 py-4 font-semibold text-slate-900">${b.namaBarang}</td>
           <td class="px-6 py-4 text-slate-600">${b.kodeKategori}</td>
           <td class="px-6 py-4 text-right text-slate-600">${formatRupiah(b.hargaBeliTerakhir)}</td>
           <td class="px-6 py-4 text-right font-semibold text-indigo-600">${formatRupiah(b.hargaJual)}</td>
@@ -1665,18 +1629,13 @@
       lucide.createIcons();
     }
 
-    // Modal forms trigger
     document.getElementById('btnTambahBarang').addEventListener('click', () => {
       document.getElementById('modalBarangTitle').innerText = 'Tambah Barang Baru';
       document.getElementById('formBarang').reset();
       document.getElementById('formBarangKode').readOnly = false;
       document.getElementById('formBarangKode').classList.remove('bg-slate-50');
-      document.getElementById('formBarangStok').readOnly = false;
-      document.getElementById('formBarangStok').classList.remove('bg-slate-50');
       
-      // Populate dropdowns
       populateBarangFormDropdowns();
-      
       document.getElementById('modalBarang').classList.remove('hidden');
     });
 
@@ -1715,13 +1674,6 @@
       document.getElementById('formBarangNama').value = b.namaBarang;
       document.getElementById('formBarangHargaBeli').value = b.hargaBeliTerakhir;
       document.getElementById('formBarangHargaJual').value = b.hargaJual;
-      
-      // Mengaktifkan agar stok barang bisa diedit secara manual
-      const stokField = document.getElementById('formBarangStok');
-      stokField.value = b.stok || 0;
-      stokField.readOnly = false; 
-      stokField.classList.remove('bg-slate-50');
-
       document.getElementById('formBarangSatuan').value = b.satuan || '';
       document.getElementById('formBarangStatus').value = b.status || 'Aktif';
 
@@ -1734,9 +1686,7 @@
 
     document.getElementById('formBarang').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
       const kodeBarang = document.getElementById('formBarangKode').value.trim();
-      const inputStok = parseInt(document.getElementById('formBarangStok').value) || 0;
       
       showLoading("Menyimpan data master barang...");
       
@@ -1747,7 +1697,6 @@
         kodeSupplier: document.getElementById('formBarangSupplier').value,
         hargaBeliTerakhir: parseFloat(document.getElementById('formBarangHargaBeli').value) || 0,
         hargaJual: parseFloat(document.getElementById('formBarangHargaJual').value) || 0,
-        stok: inputStok, // Diambil langsung dari form input agar bisa di-edit secara manual!
         satuan: document.getElementById('formBarangSatuan').value.trim(),
         status: document.getElementById('formBarangStatus').value,
         username: state.currentUser.username
@@ -1765,7 +1714,6 @@
       }
     });
 
-    // Delete Barang
     function deleteBarang(code) {
       Swal.fire({
         title: 'Hapus Barang?',
@@ -1791,7 +1739,6 @@
       });
     }
 
-    // Search Barang Filter
     document.getElementById('barangSearch').addEventListener('input', (e) => {
       const q = e.target.value.toLowerCase();
       const filtered = state.barang.filter(b => 
@@ -1800,7 +1747,6 @@
       );
       renderBarangTable(filtered);
     });
-
 
     // --- DATA MASTER: SISWA MODULE ---
     async function fetchSiswaData() {
@@ -1930,7 +1876,6 @@
       renderSiswaTable(filtered);
     });
 
-
     // --- DATA MASTER: SUPPLIER MODULE ---
     async function fetchSupplierData() {
       showLoading("Sinkronisasi data supplier...");
@@ -2034,7 +1979,6 @@
       renderSupplierTable(filtered);
     });
 
-
     // --- DATA MASTER: KATEGORI MODULE ---
     async function fetchKategoriData() {
       showLoading("Sinkronisasi data kategori...");
@@ -2125,7 +2069,6 @@
       renderKategoriTable(filtered);
     });
 
-
     // --- LAPORAN MODULE ---
     document.getElementById('btnProsesLaporan').addEventListener('click', async () => {
       const tglAwal = document.getElementById('lapTanggalMulai').value;
@@ -2151,7 +2094,6 @@
         Swal.fire('Gagal', res.message || 'Gagal memproses laporan.', 'error');
       }
     });
-
 
     // --- MANAJEMEN USER MODULE (ADMIN ONLY) ---
     async function fetchUsersData() {
@@ -2223,7 +2165,6 @@
       document.getElementById('formUserLevel').value = u.level;
       document.getElementById('formUserStatus').value = u.status;
       
-      // Password tidak wajib diisi ketika edit
       document.getElementById('formUserPassword').placeholder = "Kosongkan jika tidak ingin diubah";
       document.getElementById('formUserPassword').required = false;
 
@@ -2254,7 +2195,6 @@
       }
     });
 
-    // Delete User
     function deleteUser(username) {
       Swal.fire({
         title: 'Nonaktifkan Pengguna?',
@@ -2289,7 +2229,6 @@
       renderUsersTable(filtered);
     });
 
-
     // --- HELPERS & SHARED FUNCTIONS ---
     function formatRupiah(number) {
       if (isNaN(number) || number === null) return 'Rp 0';
@@ -2302,13 +2241,9 @@
 
     // --- SETUP SYSTEM EVENT LISTENERS ---
     function setupEventListeners() {
-      // Login Form
       document.getElementById('loginForm').addEventListener('submit', handleLogin);
-
-      // Logout button
       document.getElementById('btnLogout').addEventListener('click', handleLogout);
 
-      // Global Sync Button
       document.getElementById('btnSync').addEventListener('click', () => {
         const activeNav = document.querySelector('#sidebarNav .nav-item.active');
         if (activeNav) {
@@ -2325,7 +2260,6 @@
         }
       });
 
-      // Config Modal Events dengan Password "wa21am"
       document.getElementById('btnConfig').addEventListener('click', () => {
         Swal.fire({
           title: 'Akses Terbatas',
@@ -2370,28 +2304,24 @@
         }
       });
 
-      // Close buttons for all modals
       document.querySelectorAll('.closeModal').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.target.closest('.fixed').classList.add('hidden');
         });
       });
 
-      // Navigation Links Click
       document.querySelectorAll('#sidebarNav .nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
           e.preventDefault();
           const page = e.currentTarget.getAttribute('data-page');
           navigateToPage(page);
           
-          // Auto close mobile menu if open
           if (window.innerWidth < 768) {
             document.querySelector('aside').classList.add('hidden');
           }
         });
       });
 
-      // Mobile Menu Toggle Responsive
       document.getElementById('mobileMenuBtn').addEventListener('click', () => {
         const aside = document.querySelector('aside');
         aside.classList.toggle('hidden');
